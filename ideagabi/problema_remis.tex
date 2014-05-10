@@ -1,0 +1,109 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsxtra}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{amssymb, amsmath, amsfonts, verbatim}
+\usepackage[spanish] {babel}
+\usepackage[utf8]{inputenc}
+
+\textwidth 6.5in \textheight 9in \oddsidemargin -.2in
+\evensidemargin 0in \topmargin -0.5in
+
+\begin{document}
+\begin{center}
+ {\large MODELO PARA LA AUTOMATIZACIÓN DE LA ASIGNACIÓN ÓPTIMA EN GUARDIAS NOCTURNAS DE UNA EMPRESA DE ALQUILER DE AUTOMÓVILES CON CONDUCTOR.\\
+ (¿Que título, no?)}\\
+(Facultad de Matem\'atica, Astronom\'ia y F\'isica, UNC)
+\vspace{0.5cm}\\
+\end{center}
+
+
+{\large\textbf{1. Introducci\'on}}
+
+En este trabajo se abordará el modelado y resolución de un problema de asignación óptima para guardias nocturnas... bla bla bla...  algunas restricciones del problema... bla bla bla... que los remiseros no se enojen... bla bla bla...
+(Alguien con buena capacidad de redacción que se encargue de esta parte).
+
+{\large\textbf{2. Descripción del problema.}}
+
+Aquí deberíamos definir bien (posiblemente entre todos juntos una ves que tengamos la forma de resolver el problema) cuales son las características de nuestro problema y dejarlas bien detalladas.
+
+{\large\textbf{3. El modelo}}
+
+A continuación detallaremos los índices, variables y parámetros de nuestro modelo, luego escribiremos el modelo a resolver y finalmente desarrollaremos una breve explicación de las ecuaciones que lo constituyen.
+
+\begin{enumerate}
+ \item Parámetros
+ 
+ $R$: Número de choferes en la empresa.
+ 
+ $N$: Número de noches a cubrir (periodo de tiempo).
+ 
+ $L$: Periodo de tiempo de ``descanso'' de los choferes.
+ 
+ $h_{i1}$: Parámetro que indica la cantidad de noches que trabajó el remisero $i$ del tipo $N_1$ en el periodo de tiempo $N$.
+ 
+ $h_{i2}$: Parámetro que indica la cantidad de noches que trabajó el remisero $i$ del tipo $N_2$ en el periodo de tiempo $N$.
+ 
+ \item Índices
+ 
+ $i,j\in\{1,\ldots,R\}$: Índices sobre los remises.
+ 
+ $t\in\{1,\ldots,N\}$: Índice sobre las noches.
+ 
+ $N_1\subset\{1,\ldots,N\}$: Índice de los días con menos demanda (lun, mar, mie, jue y dom).
+ 
+ $N_2\subset\{1,\ldots,N\}$: Índice de los días con más demanda (vie y sab).
+ 
+ $N_{ni}$: Índice de las noches donde el chofer $i$ no puede trabajar.
+ 
+ $N_{oi}$: Índice de las noches donde el chofer $i$ esta obligado a trabajar.
+ 
+ \item Variables
+ 
+ $x_{it}$: Variable binaria que vale 1 si el remisero $i$ trabajo la noche $t$ y 0 caso contrario.
+ 
+ $l_1$: Variable entera que indica la cantidad mínima de noches del tipo $N_1$ que puede trabajar un remisero.
+ 
+ $u_1$: Variable entera que indica la cantidad máxima de noches del tipo $N_1$ que puede trabajar un remisero.
+ 
+ $l_2$: Variable entera que indica la cantidad mínima de noches del tipo $N_2$ que puede trabajar un remisero.
+ 
+ $u_2$: Variable entera que indica la cantidad máxima de noches del tipo $N_2$ que puede trabajar un remisero.
+ 
+\end{enumerate}
+
+Luego de estas definiciones nosotros proponemos encontrar un vector de la forma
+$$x=(x_{11},x_{12},x_{13},\ldots,x_{1N},x_{21},x_{22},\ldots,x_{2N},x_{31},\ldots,x_{RN}),$$
+
+que sea solución del siguiente problema de optimización entera:
+
+\begin{eqnarray}
+ \mathrm{minimizar}& & \displaystyle{J=\max_{i,j}\, \left(\sum_t x_{it}-\sum_t x_{jt}\right)},\\
+ \mathrm{sujeto\;a }& & \sum_{k=0}^{L-1} x_{i(t+k)}=1,\;\forall i=1,\ldots,R,\;\forall t=1,\ldots,N-L+1,\\ 
+ & & \sum_i x_{it} = 2 \qquad \forall t\in N_1,\\
+ & & \sum_i x_{it} = 3 \qquad \forall t\in N_2,\\
+ & & l_1 \leq h_{i1}+\sum_{t\in N_1} x_{it}\leq u_1, \qquad \forall i=1,\ldots,R,\\
+ & & l_2 \leq h_{i2}+\sum_{t\in N_2} x_{it}\leq u_2,\qquad \forall i=1,\ldots,R,\\
+ & & u_k \leq l_k + 2,\qquad k=1,2,\\
+ & & x_{it} = 0,\qquad i\in\{1,\ldots,R\},\;t\in N_{ni},\\
+ & & x_{it} = 1,\qquad i\in\{1,\ldots,R\},\;t\in N_{oi}.
+\end{eqnarray}
+
+La función objetivo J de $(1)$ es una función para medir la ``justicia'' dentro de la distribución de las guardias ya que $J$ indica la diferencia de noches trabajadas por el remisero que se le asignaron más noches y el remisero al que le asignaron menos cantidad de noches, el minimizar esta función estamos haciendo que la cantidad de noches trabajadas por un par cualquiera de remiseros sean ambas lo más próximas entre ellas.
+
+La ecuación $(2)$ indica que para cualquier conjunto de $L$ noches consecutivas cualquier remisero solo trabaja 1 noche, esta ecuación también se podría plantear con $\leq$ para ser mas flexibles a la hora de la factibilidad de las posibles soluciones, es decir, pedir que dadas $L$ noches consecutivas, el remisero trabaje a lo sumo una de esas noches.
+
+Las ecuaciones $(3)$ y $(4)$ representan las condiciones de tener 2 choferes las noches de menor demanda y 3 las de mayor demanda.
+
+Las ecuaciones $(5)$ y $(6)$ dan las restricciones de que los choferes trabajen equitativamente las noches de menor y mayor demanda respectivamente, es decir, esta restricción es por ejemplo para evitar que algún chofer sea beneficiado trabajando muchas mas noches de mayor demanda que otro. Y la ecuación $(7)$ está dada para que el máximo de días a trabajar no sea mucho mayor que el mínimo. En estas ecuaciones se incluyen los parámetros $h_{i1}$ y $h_{i2}$ para ajustar ``injusticias'' que pueden llegar a quedar de un periodo de tiempo anterior. Denominamos ``injusticias'' a la cantidad de noches que un remisero trabaja de más o menos respecto a otros.
+
+Las ecuaciones $(8)$ y $(9)$ imponen las restricciones de las noches donde un determinado chofer $i$ no trabaja la noche $t$ o esta obligado a trabajar.
+
+{\large\textbf{4. Otra consideraciones}}
+
+Para la restricción de tener 2 coches para una suplencia en caso de ser necesarios, la idea es realizar otra ejecución del algoritmo ahora tomando la ecuación $(4)$ igual a 2 y agregando en la ecuación $(9)$ los días que están asignados a trabajar los remiseros.
+
+En el caso de que por algún imprevisto se altere la cantidad de choferes disponibles, la idea es utilizar los datos hasta ese momento y agregarlos a los parámetro históricos $h_{i1}$ y $h_{i2}$ y ejecutar el algoritmo con los nuevos parámetros.
+
+\end{document}
