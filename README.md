@@ -24,8 +24,6 @@ Soluciones propuestas
 
 - Bruno y Ro propusieron distribuir la flota en pares y ternas, y buscar un método para irlas acomodando de forma que se cumplan las condiciones de *justicia* y *espaciado*.
 
-- Pablo armó su variante de las ideas de Bruno y Ro, y resumió sus divagues en este iPython Notebook:
-
-[url](http://nbviewer.ipython.org/github/pablocelayes/remiseros/blob/master/ideapablo/Remiseros.ipynb?create=1)
+- Pablo armó su variante de las ideas de Bruno y Ro, y resumió sus divagues en este [iPython Notebook] (http://nbviewer.ipython.org/github/pablocelayes/remiseros/blob/master/ideapablo/Remiseros.ipynb?create=1)
 
 ( el código fuente está en /ideapablo )
