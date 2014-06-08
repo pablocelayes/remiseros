@@ -15,3 +15,15 @@ Recuerden que el gremio remiseril es muy volátil y si un remisero se enoja ento
 Otra cosa a tener en cuenta es que tiene que ser adaptable a cambios en la cantidad de remiseros y al menos momentáneamente debería servir para el rango entre 15 y 25 autos, actualmente en la remisera hay 19.
 
 Y por ultimo el sistema tiene que ser remisero-friendly osea tiene que pedir los autos y hacer las guardias automáticamente, estar atento a los cambios en el numero de autos y ser fácilmente demostrable que es un sistema justo para todos por que sino los remiseros se enojan y entonces...
+
+
+Soluciones propuestas
+========
+
+- Gabriel propuso modelarlo como un problema de optimización entera, pueden encontrar un documento explicando su idea en /ideagabi
+
+- Bruno y Ro propusieron distribuir la flota en pares y ternas, y buscar un método para irlas acomodando de forma que se cumplan las condiciones de *justicia* y *espaciado*.
+
+- Pablo armó su variante de las ideas de Bruno y Ro, y resumió sus divagues en este [iPython Notebook] (http://nbviewer.ipython.org/github/pablocelayes/remiseros/blob/master/ideapablo/Remiseros.ipynb?create=1)
+
+( el código fuente está en /ideapablo )
